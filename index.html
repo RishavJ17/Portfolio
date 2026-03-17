@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rishav Jhaveri — Projects Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Instrument+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0A0A0C;--surface:#111114;--surface-hover:#18181C;--border:#222228;--border-accent:#2A2A33;--text-primary:#E8E6E3;--text-secondary:#8A8A95;--text-muted:#55555F;--accent:#C9A96E;--accent-dim:#9E7F4A;--accent-glow:rgba(201,169,110,0.08);--green:#5DB075;--blue:#5B8DEF;--serif:'DM Serif Display',Georgia,serif;--sans:'Instrument Sans',-apple-system,sans-serif;--mono:'JetBrains Mono',monospace}
+*{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}
+body{font-family:var(--sans);background:var(--bg);color:var(--text-primary);line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");pointer-events:none;z-index:9999}
+::-webkit-scrollbar{width:6px}::-webkit-scrollbar-track{background:var(--bg)}::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px}
+header{position:fixed;top:0;left:0;right:0;z-index:100;padding:20px 48px;display:flex;justify-content:space-between;align-items:center;backdrop-filter:blur(20px);background:rgba(10,10,12,0.8);border-bottom:1px solid var(--border)}
+.logo{font-family:var(--serif);font-size:1.5rem;color:var(--accent);letter-spacing:-0.02em}
+nav{display:flex;gap:32px;align-items:center}nav a{color:var(--text-secondary);text-decoration:none;font-size:0.82rem;font-weight:500;letter-spacing:0.06em;text-transform:uppercase;transition:color 0.2s;position:relative}nav a::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:1px;background:var(--accent);transition:width 0.3s ease}nav a:hover{color:var(--text-primary)}nav a:hover::after{width:100%}
+.hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:120px 80px 80px;position:relative;margin:0 auto;width:100%}
+.hero-title-large{font-family:var(--sans);font-size:clamp(4.5rem,10vw,9rem);line-height:1;letter-spacing:-0.04em;color:var(--accent);font-weight:700;margin-bottom:28px;opacity:0;animation:fadeUp 0.8s ease forwards 0.2s;width:100%}
+.hero h1{font-family:var(--serif);font-size:clamp(3rem,7vw,6.5rem);line-height:1.05;letter-spacing:-0.03em;color:var(--text-primary);width:100%;opacity:0;animation:fadeUp 0.8s ease forwards 0.4s}.hero h1 em{font-style:italic;color:var(--accent)}
+.hero-desc{margin-top:32px;font-size:1.1rem;color:var(--text-secondary);width:100%;line-height:1.7;opacity:0;animation:fadeUp 0.8s ease forwards 0.6s}
+.hero-stats{display:flex;gap:48px;margin-top:56px;padding-top:40px;border-top:1px solid var(--border);opacity:0;animation:fadeUp 0.8s ease forwards 0.8s}
+.stat-item .stat-number{font-family:var(--serif);font-size:2.2rem;color:var(--text-primary);letter-spacing:-0.02em}.stat-item .stat-label{font-size:0.78rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.08em;margin-top:4px}
+.hero-orb{position:absolute;top:15%;right:5%;width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,rgba(201,169,110,0.06) 0%,transparent 70%);filter:blur(60px);pointer-events:none;animation:orbFloat 8s ease-in-out infinite}
+@keyframes orbFloat{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(-30px,20px) scale(1.05)}}
+section{max-width:1400px;margin:0 auto;padding:100px 48px}
+.section-header{display:flex;align-items:baseline;gap:16px;margin-bottom:64px}.section-number{font-family:var(--mono);font-size:0.75rem;color:var(--accent-dim);letter-spacing:0.05em}.section-title{font-family:var(--serif);font-size:2.4rem;letter-spacing:-0.02em}.section-line{flex:1;height:1px;background:var(--border);margin-left:24px}
+.projects-grid{display:flex;flex-direction:column;gap:24px}
+.project-card{background:var(--surface);border:1px solid var(--border);border-radius:16px;overflow:hidden;transition:all 0.4s cubic-bezier(0.16,1,0.3,1);cursor:pointer;position:relative}.project-card:hover{border-color:var(--accent-dim);transform:translateY(-2px);box-shadow:0 20px 60px rgba(0,0,0,0.3),0 0 0 1px var(--accent-dim)}
+.project-card-inner{display:grid;grid-template-columns:1fr 1fr;min-height:310px}
+.project-left{padding:40px;display:flex;flex-direction:column;justify-content:space-between}.project-right{padding:40px;background:rgba(201,169,110,0.02);border-left:1px solid var(--border);display:flex;flex-direction:column;justify-content:center;gap:18px}
+.project-category{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:0.7rem;color:var(--accent);letter-spacing:0.12em;text-transform:uppercase;margin-bottom:12px}.project-category .dot{width:6px;height:6px;border-radius:50%;background:var(--accent)}
+.project-title{font-family:var(--serif);font-size:1.65rem;line-height:1.2;letter-spacing:-0.01em;margin-bottom:10px}
+.project-subtitle{font-size:0.82rem;color:var(--text-muted);font-weight:500;margin-bottom:12px;text-transform:uppercase;letter-spacing:0.04em}
+.project-desc{font-size:0.88rem;color:var(--text-secondary);line-height:1.7}
+.metric-row{display:flex;justify-content:space-between;align-items:center;padding:11px 0;border-bottom:1px solid var(--border)}.metric-row:last-child{border-bottom:none}
+.metric-label{font-size:0.76rem;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.06em}.metric-value{font-family:var(--mono);font-size:0.82rem;color:var(--text-primary);font-weight:500;text-align:right}
+.metric-value.positive{color:var(--green)}.metric-value.highlight{color:var(--accent)}.metric-value.blue{color:var(--blue)}
+.skills-row{display:flex;flex-wrap:wrap;gap:7px;margin-top:16px}.skill-tag{font-size:0.68rem;font-weight:600;padding:4px 11px;border-radius:100px;background:var(--accent-glow);color:var(--accent);border:1px solid rgba(201,169,110,0.15);letter-spacing:0.03em}
+.project-expanded{max-height:0;overflow:hidden;transition:max-height 0.5s cubic-bezier(0.16,1,0.3,1)}.project-card.expanded .project-expanded{max-height:1000px}
+.project-expanded-inner{padding:0 40px 40px;border-top:1px solid var(--border)}
+.expanded-grid{display:grid;grid-template-columns:1fr 1fr;gap:28px;padding-top:24px}
+.detail-block h4{font-family:var(--mono);font-size:0.68rem;color:var(--accent-dim);text-transform:uppercase;letter-spacing:0.12em;margin-bottom:10px}
+.detail-block li{font-size:0.84rem;color:var(--text-secondary);line-height:1.7;padding:4px 0;padding-left:16px;position:relative;list-style:none}.detail-block ul{padding:0}.detail-block ul li::before{content:'→';position:absolute;left:0;color:var(--accent-dim);font-size:0.8rem}
+.files-section{margin-top:22px}.files-section h4{font-family:var(--mono);font-size:0.68rem;color:var(--accent-dim);text-transform:uppercase;letter-spacing:0.12em;margin-bottom:10px}.file-links{display:flex;flex-wrap:wrap;gap:10px}
+.file-link{display:inline-flex;align-items:center;gap:10px;padding:9px 16px;background:rgba(201,169,110,0.05);border:1px solid rgba(201,169,110,0.18);border-radius:10px;color:var(--accent);text-decoration:none;font-size:0.76rem;font-weight:600;letter-spacing:0.02em;transition:all 0.25s ease}.file-link:hover{background:rgba(201,169,110,0.12);border-color:var(--accent);transform:translateY(-1px);box-shadow:0 4px 16px rgba(201,169,110,0.1)}
+.file-icon{width:24px;height:24px;border-radius:5px;display:inline-flex;align-items:center;justify-content:center;font-size:0.5rem;font-weight:700;color:#fff;flex-shrink:0}.file-icon.xlsx{background:#1D6F42}.file-icon.docx{background:#2B579A}.file-icon.pdf{background:#D32F2F}.file-icon.pptx{background:#D24726}.file-icon.py{background:#3776AB}.file-icon.ipynb{background:#F37626}
+.file-placeholder{display:inline-flex;align-items:center;gap:10px;padding:9px 16px;background:rgba(85,85,95,0.06);border:1px dashed rgba(85,85,95,0.25);border-radius:10px;color:var(--text-muted);font-size:0.74rem;font-weight:500}.file-placeholder .file-icon{opacity:0.35}
+.toggle-icon{position:absolute;top:20px;right:20px;width:32px;height:32px;border-radius:50%;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:1rem;color:var(--text-muted);transition:all 0.3s ease;background:transparent}.project-card:hover .toggle-icon{border-color:var(--accent-dim);color:var(--accent)}.project-card.expanded .toggle-icon{transform:rotate(45deg)}
+.skills-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.skill-card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:26px;transition:all 0.3s ease;overflow:hidden}.skill-card:hover{border-color:var(--border-accent);background:var(--surface-hover)}.skill-card-icon{font-size:1.4rem;margin-bottom:12px}.skill-card h3{font-family:var(--serif);font-size:1.05rem;margin-bottom:5px}.skill-card p{font-size:0.78rem;color:var(--text-muted);line-height:1.5}
+.skill-bar-track{width:100%;height:3px;background:var(--border);border-radius:2px;margin-top:16px;overflow:hidden}.skill-bar-fill{height:100%;background:linear-gradient(90deg,var(--accent-dim),var(--accent));border-radius:2px;width:0;transition:width 1.5s cubic-bezier(0.16,1,0.3,1)}
+.tools-row{display:flex;flex-wrap:wrap;gap:10px}.tool-chip{display:flex;align-items:center;gap:8px;padding:12px 18px;background:var(--surface);border:1px solid var(--border);border-radius:10px;font-size:0.82rem;color:var(--text-secondary);font-weight:500;transition:all 0.3s ease}.tool-chip:hover{border-color:var(--accent-dim);color:var(--text-primary);background:var(--surface-hover)}
+.repo-banner{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:32px 40px;display:flex;align-items:center;justify-content:space-between;gap:24px;margin-bottom:14px}
+.repo-banner-left h3{font-family:var(--serif);font-size:1.15rem;margin-bottom:4px}.repo-banner-left p{font-size:0.82rem;color:var(--text-muted);line-height:1.5}
+.repo-file-link{display:inline-flex;align-items:center;gap:8px;padding:9px 18px;background:rgba(43,87,154,0.1);border:1px solid rgba(43,87,154,0.3);border-radius:10px;color:#7BAAEF;text-decoration:none;font-size:0.8rem;font-weight:600;transition:all 0.25s ease;white-space:nowrap}.repo-file-link:hover{background:rgba(43,87,154,0.18);border-color:#5B8DEF;transform:translateY(-1px)}
+.upload-hint{margin-top:20px;font-size:0.84rem;color:var(--text-muted);line-height:1.7;padding:20px 24px;background:rgba(93,176,117,0.04);border:1px dashed rgba(93,176,117,0.2);border-radius:12px}.upload-hint strong{color:var(--green);font-weight:600}
+footer{max-width:1400px;margin:0 auto;padding:60px 48px;border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center}.footer-left{font-family:var(--serif);font-size:1.2rem;color:var(--accent)}.footer-right{font-size:0.78rem;color:var(--text-muted);letter-spacing:0.04em}
+@keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}.animate-in{opacity:0;transform:translateY(30px);transition:all 0.7s cubic-bezier(0.16,1,0.3,1)}.animate-in.visible{opacity:1;transform:translateY(0)}
+@media(max-width:900px){header{padding:16px 24px}.hero{padding:100px 24px 60px}section{padding:60px 24px}.project-card-inner{grid-template-columns:1fr}.project-right{border-left:none;border-top:1px solid var(--border)}.project-left,.project-right,.project-expanded-inner{padding:24px}.skills-grid{grid-template-columns:1fr 1fr}.hero-stats{flex-wrap:wrap;gap:24px}.expanded-grid{grid-template-columns:1fr}nav{gap:14px}nav a{font-size:0.68rem}footer{flex-direction:column;gap:16px;text-align:center}.repo-banner{flex-direction:column;text-align:center}.hero-title-large{font-size:clamp(3rem,12vw,5rem)}}
+</style>
+</head>
+<body>
+<header>
+  <div class="logo">Rishav Jhaveri</div>
+  <nav><a href="#projects">Projects</a><a href="#competencies">Competencies</a><a href="#tools">Tools</a><a href="#files">Files</a></nav>
+</header>
+
+<section class="hero">
+  <div class="hero-orb"></div>
+  <h1>Building insight from <em>data,</em> strategy from <em>numbers.</em></h1>
+  <p class="hero-desc">Financial modeling, econometrics, derivatives trading, and quantitative strategy across M&A advisory, corporate valuation, portfolio management, options trading, and global market research.</p>
+  <div class="hero-stats">
+    <div class="stat-item"><div class="stat-number">7</div><div class="stat-label">Projects</div></div>
+    <div class="stat-item"><div class="stat-number">10+</div><div class="stat-label">Tools & Technologies</div></div>
+    <div class="stat-item"><div class="stat-number">5+</div><div class="stat-label">Financial Models Built</div></div>
+    <div class="stat-item"><div class="stat-number">3</div><div class="stat-label">Programming Languages</div></div>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="section-header animate-in"><span class="section-number">01</span><h2 class="section-title">Projects</h2><div class="section-line"></div></div>
+  <div class="projects-grid">
+
+<!-- PROJECT 1: LVMH x Tiffany -->
+<div class="project-card animate-in" onclick="toggleCard(this)">
+  <span class="toggle-icon">+</span>
+  <div class="project-card-inner">
+    <div class="project-left">
+      <div>
+        <div class="project-category"><span class="dot"></span> M&A Advisory</div>
+        <h3 class="project-title">LVMH Acquisition of Tiffany & Co.</h3>
+        <p class="project-subtitle">Transaction Analysis · $15.8B Deal</p>
+        <p class="project-desc">Built an integrated three-statement model for the $15.8B LVMH/Tiffany merger with 5-year projections. Conducted DCF and comparable company analysis to establish intrinsic stand-alone value, identifying $100–150M in annual cost synergies and recommending a negotiation range benchmarked against LVMH's prior Bulgari acquisition.</p>
+      </div>
+      <div class="skills-row"><span class="skill-tag">Three-Statement Modeling</span><span class="skill-tag">DCF</span><span class="skill-tag">Comps Analysis</span><span class="skill-tag">Accretion/Dilution</span><span class="skill-tag">Synergy Modeling</span></div>
+    </div>
+    <div class="project-right">
+      <div class="metric-row"><span class="metric-label">Deal Value</span><span class="metric-value highlight">$15.8B</span></div>
+      <div class="metric-row"><span class="metric-label">Intrinsic Value / Share</span><span class="metric-value">$106.95</span></div>
+      <div class="metric-row"><span class="metric-label">Market Premium</span><span class="metric-value positive">+17%</span></div>
+      <div class="metric-row"><span class="metric-label">Ann. Cost Synergies</span><span class="metric-value">$100–150M</span></div>
+      <div class="metric-row"><span class="metric-label">Recommended Range</span><span class="metric-value highlight">$135–140/sh</span></div>
+      <div class="metric-row"><span class="metric-label">Benchmark</span><span class="metric-value blue">29× EBIT (Bulgari)</span></div>
+    </div>
+  </div>
+  <div class="project-expanded"><div class="project-expanded-inner">
+    <div class="expanded-grid">
+      <div class="detail-block"><h4>Methodology</h4><ul>
+        <li>Integrated P&L, Balance Sheet, and Cash Flow projections over 5-year horizon</li>
+        <li>DCF analysis with multiple terminal value approaches</li>
+        <li>Comparable company analysis using EV/EBITDA, EV/EBIT, and P/E multiples</li>
+        <li>Accretion/dilution analysis under various financing scenarios</li>
+        <li>Sensitivity analysis on key assumptions and discount rates</li>
+      </ul></div>
+      <div class="detail-block"><h4>Deliverables</h4><ul>
+        <li>Full three-statement financial model (Excel)</li>
+        <li>DCF & comparable company valuation workbook</li>
+        <li>Synergy analysis and integration cost model</li>
+        <li>Executive presentation with strategic rationale</li>
+        <li>Final investment recommendation memo</li>
+      </ul></div>
+    </div>
+    <div class="files-section"><h4>Project Files</h4><div class="file-links">
+      <a href="Tiffany_Model.xlsx" class="file-link" download><span class="file-icon xlsx">XLS</span> Financial Model</a>
+      <a href="Tiffany___Co_.pptx" class="file-link" download><span class="file-icon pptx">PPT</span> Presentation</a>
+      <a href="M_A_-_LVMH_x_Tiffany.pdf" class="file-link" download><span class="file-icon pdf">PDF</span> Case Report</a>
+    </div></div>
+  </div></div>
+</div>
+
+<!-- PROJECT 2: Microsoft Valuation -->
+<div class="project-card animate-in" onclick="toggleCard(this)">
+  <span class="toggle-icon">+</span>
+  <div class="project-card-inner">
+    <div class="project-left">
+      <div>
+        <div class="project-category"><span class="dot"></span> Valuation Consulting</div>
+        <h3 class="project-title">Microsoft Corporation</h3>
+        <p class="project-subtitle">Corporate Valuation & Strategy</p>
+        <p class="project-desc">Executed a full-scope corporate valuation constructing a detailed DCF model and calculating WACC to determine intrinsic asset value. Performed fundamental analysis and peer ratio benchmarking to identify inefficiencies, modeling the impact of CapEx and capital structure shifts on shareholder wealth.</p>
+      </div>
+      <div class="skills-row"><span class="skill-tag">DCF</span><span class="skill-tag">WACC</span><span class="skill-tag">Peer Benchmarking</span><span class="skill-tag">Capital Structure</span><span class="skill-tag">Scenario Modeling</span></div>
+    </div>
+    <div class="project-right">
+      <div class="metric-row"><span class="metric-label">Scope</span><span class="metric-value highlight">Full Corporate Valuation</span></div>
+      <div class="metric-row"><span class="metric-label">Primary Method</span><span class="metric-value">DCF / WACC</span></div>
+      <div class="metric-row"><span class="metric-label">Secondary Method</span><span class="metric-value">Peer Ratio Benchmarking</span></div>
+      <div class="metric-row"><span class="metric-label">Focus Areas</span><span class="metric-value blue">CapEx & Capital Structure</span></div>
+      <div class="metric-row"><span class="metric-label">Analysis Type</span><span class="metric-value">Fundamental + Scenario</span></div>
+    </div>
+  </div>
+  <div class="project-expanded"><div class="project-expanded-inner">
+    <div class="expanded-grid">
+      <div class="detail-block"><h4>Methodology</h4><ul>
+        <li>Detailed DCF model with multi-scenario terminal values</li>
+        <li>WACC calculation with sensitivity ranges</li>
+        <li>Historical performance trend analysis</li>
+        <li>Peer group benchmarking across comparable tech firms</li>
+      </ul></div>
+      <div class="detail-block"><h4>Deliverables</h4><ul>
+        <li>Comprehensive DCF valuation model (Excel)</li>
+        <li>WACC analysis with component breakdown</li>
+        <li>Peer benchmarking report</li>
+        <li>Strategic recommendations memo</li>
+      </ul></div>
+    </div>
+    <div class="files-section"><h4>Project Files</h4><div class="file-links">
+      <a href="Microsoft_Valuation_Consulting_Report.pdf" class="file-link" download><span class="file-icon pdf">PDF</span> Valuation Report</a>
+    </div></div>
+  </div></div>
+</div>
+
+<!-- PROJECT 3: Options Trading -->
+<div class="project-card animate-in" onclick="toggleCard(this)">
+  <span class="toggle-icon">+</span>
+  <div class="project-card-inner">
+    <div class="project-left">
+      <div>
+        <div class="project-category"><span class="dot"></span> Derivatives & Risk Analytics</div>
+        <h3 class="project-title">Options Trading Competition</h3>
+        <p class="project-subtitle">Investopedia Simulator · Multi-Strategy Portfolio</p>
+        <p class="project-desc">Executed a multi-strategy options trading portfolio deploying Long Calls, Long Puts, Protective Puts, Straddles, and Strangles across major equities and ETFs. Achieved a peak portfolio value of $1.13M (+13.4%) before drawdown from volatility mispricing in straddle and put positions.</p>
+      </div>
+      <div class="skills-row"><span class="skill-tag">Options Pricing</span><span class="skill-tag">Long Calls/Puts</span><span class="skill-tag">Protective Puts</span><span class="skill-tag">Straddles</span><span class="skill-tag">Strangles</span><span class="skill-tag">Python</span></div>
+    </div>
+    <div class="project-right">
+      <div class="metric-row"><span class="metric-label">Starting Capital</span><span class="metric-value">$1,000,000</span></div>
+      <div class="metric-row"><span class="metric-label">Peak Value</span><span class="metric-value positive">$1,134,016</span></div>
+      <div class="metric-row"><span class="metric-label">Peak Return</span><span class="metric-value positive">+13.4%</span></div>
+      <div class="metric-row"><span class="metric-label">Biggest Winner</span><span class="metric-value highlight">NKE Long Call +$9,200</span></div>
+      <div class="metric-row"><span class="metric-label">Strategies Deployed</span><span class="metric-value blue">5 (15+ trades)</span></div>
+    </div>
+  </div>
+  <div class="project-expanded"><div class="project-expanded-inner">
+    <div class="expanded-grid">
+      <div class="detail-block"><h4>Methodology</h4><ul>
+        <li><strong>Protective Puts:</strong> AAPL, NKE, NVDA — hedged stock positions with put insurance</li>
+        <li><strong>Long Calls:</strong> NKE (biggest winner +$9,200), PLTR, and more</li>
+        <li><strong>Long Puts:</strong> SPY, QQQ — directional bearish bets on indices</li>
+        <li><strong>Straddles:</strong> NFLX, WMT, GOOG — earnings volatility plays</li>
+        <li><strong>Strangles:</strong> Out-of-the-money combinations for high-volatility events</li>
+      </ul></div>
+      <div class="detail-block"><h4>Key Learnings</h4><ul>
+        <li>Straddles and Long Puts drove largest losses (~$50K and ~$41K respectively)</li>
+        <li>Overestimated implied volatility around earnings and macro events</li>
+        <li>Protective Puts provided effective downside protection</li>
+        <li>Tariff uncertainty and flat markets eroded time value on premium-heavy positions</li>
+      </ul></div>
+    </div>
+    <div class="files-section"><h4>Project Files</h4><div class="file-links">
+      <a href="Derivatives_Report.pdf" class="file-link" download><span class="file-icon pdf">PDF</span> Full Trading Report</a>
+      <a href="Derivatives_project.ipynb" class="file-link" download><span class="file-icon ipynb">NB</span> Python Analysis</a>
+    </div></div>
+  </div></div>
+</div>
+
+<!-- PROJECT 4: Spillover Effects Research -->
+<div class="project-card animate-in" onclick="toggleCard(this)">
+  <span class="toggle-icon">+</span>
+  <div class="project-card-inner">
+    <div class="project-left">
+      <div>
+        <div class="project-category"><span class="dot"></span> Financial Econometrics</div>
+        <h3 class="project-title">Research Paper — U.S. Market Spillover Effects on Global Indices</h3>
+        <p class="project-subtitle">VAR-BEKK GARCH · 10-Year Global Study</p>
+        <p class="project-desc">Investigated return and volatility spillovers from the U.S. stock market (S&P 500) to 5 major global indices — FTSE 100 (UK), DAX (Germany), Nikkei 225 (Japan), IBOVESPA (Brazil), and MASI (Morocco) — across developed and emerging markets over a 10-year period (2014–2024). Employed VAR-BEKK GARCH modeling with Lee-Strazicich structural break tests to capture regime shifts during COVID-19, Russia-Ukraine conflict, and the 2024 U.S. elections.</p>
+      </div>
+      <div class="skills-row"><span class="skill-tag">VAR Model</span><span class="skill-tag">BEKK-GARCH</span><span class="skill-tag">Structural Breaks</span><span class="skill-tag">Volatility Spillovers</span><span class="skill-tag">MATLAB</span><span class="skill-tag">Bloomberg Terminal</span><span class="skill-tag">Econometrics</span></div>
+    </div>
+    <div class="project-right">
+      <div class="metric-row"><span class="metric-label">Time Span</span><span class="metric-value highlight">2014–2024 (10 yrs)</span></div>
+      <div class="metric-row"><span class="metric-label">Global Indices</span><span class="metric-value">SPX, FTSE, DAX, NKY, IBOV, MASI</span></div>
+      <div class="metric-row"><span class="metric-label">SPX→UKX Spillover</span><span class="metric-value positive">0.0197 → 0.1741</span></div>
+      <div class="metric-row"><span class="metric-label">Structural Breaks</span><span class="metric-value blue">March & April 2020</span></div>
+      <div class="metric-row"><span class="metric-label">Wald Test</span><span class="metric-value highlight">All H₀ rejected (p&lt;0.05)</span></div>
+    </div>
+  </div>
+  <div class="project-expanded"><div class="project-expanded-inner">
+    <div class="expanded-grid">
+      <div class="detail-block"><h4>Methodology</h4><ul>
+        <li>Lee-Strazicich LM tests identifying structural breaks around COVID-19 (March 2020)</li>
+        <li>VAR(1) model for return spillovers: pre-crisis vs post-crisis coefficient comparison</li>
+        <li>BEKK-GARCH(1,1) for volatility spillovers with Cholesky decomposition</li>
+        <li>Wald test for return, volatility, and joint spillover hypothesis testing</li>
+        <li>Data sourced from Bloomberg Terminal via BQL, cleaned and modeled in MATLAB</li>
+      </ul></div>
+      <div class="detail-block"><h4>Key Findings</h4><ul>
+        <li>U.S. market confirmed as dominant transmitter of global financial shocks</li>
+        <li>Post-crisis SPX→UKX return spillover surged 8.8× (0.0197 → 0.1741)</li>
+        <li>Developed markets showed faster recovery; emerging markets lagged with structural fragility</li>
+        <li>BEKK off-diagonal GARCH coefficients increased from ~0 to 0.1328 post-crisis</li>
+        <li>Policy-driven recovery amplified market synchronization globally</li>
+      </ul></div>
+    </div>
+    <div class="files-section"><h4>Project Files</h4><div class="file-links">
+      <a href="Spillover_Effects_Research.pdf" class="file-link" download><span class="file-icon pdf">PDF</span> Full Research Paper</a>
+    </div></div>
+  </div></div>
+</div>
+
+<!-- PROJECT 5: Momentum Strategy -->
+<div class="project-card animate-in" onclick="toggleCard(this)">
+  <span class="toggle-icon">+</span>
+  <div class="project-card-inner">
+    <div class="project-left">
+      <div>
+        <div class="project-category"><span class="dot"></span> Quantitative Trading</div>
+        <h3 class="project-title">Momentum Sector Rotation Strategy</h3>
+        <p class="project-subtitle">Fama-French 49 Industries</p>
+        <p class="project-desc">Developed a momentum-based sector rotation strategy using the Fama-French 49 Industry dataset, significantly outperforming benchmark. Automated the full performance analysis and visualization pipeline using Python through rigorous backtesting across multiple market cycles.</p>
+      </div>
+      <div class="skills-row"><span class="skill-tag">Python</span><span class="skill-tag">Quantitative Analysis</span><span class="skill-tag">Backtesting</span><span class="skill-tag">Momentum Strategies</span><span class="skill-tag">Data Visualization</span></div>
+    </div>
+    <div class="project-right">
+      <div class="metric-row"><span class="metric-label">Ann. Return</span><span class="metric-value positive">21.47%</span></div>
+      <div class="metric-row"><span class="metric-label">Sharpe Ratio</span><span class="metric-value highlight">0.67</span></div>
+      <div class="metric-row"><span class="metric-label">vs Benchmark</span><span class="metric-value positive">Significant Outperformance</span></div>
+      <div class="metric-row"><span class="metric-label">Dataset</span><span class="metric-value blue">Fama-French 49 Industries</span></div>
+      <div class="metric-row"><span class="metric-label">Tech Stack</span><span class="metric-value">Pandas · NumPy · Matplotlib</span></div>
+    </div>
+  </div>
+  <div class="project-expanded"><div class="project-expanded-inner">
+    <div class="expanded-grid">
+      <div class="detail-block"><h4>Methodology</h4><ul>
+        <li>Momentum signal construction across 49 industry sectors</li>
+        <li>Dynamic sector rotation based on trailing performance rankings</li>
+        <li>Rigorous out-of-sample backtesting across multiple market regimes</li>
+        <li>Automated pipeline: data ingestion → signal generation → execution → reporting</li>
+      </ul></div>
+      <div class="detail-block"><h4>Technical Implementation</h4><ul>
+        <li>Python: Pandas for data handling, NumPy for computation</li>
+        <li>Matplotlib for performance visualization and equity curves</li>
+        <li>Multi-cycle backtest framework with transaction cost modeling</li>
+        <li>Statistical significance testing of strategy alpha</li>
+      </ul></div>
+    </div>
+    <div class="files-section"><h4>Project Files</h4><div class="file-links">
+      <a href="Project_3.ipynb" class="file-link" download><span class="file-icon ipynb">NB</span> Python Notebook</a>
+      <a href="Momentum_Based_Strategy.pdf" class="file-link" download><span class="file-icon pdf">PDF</span> Strategy Report</a>
+    </div></div>
+  </div></div>
+</div>
+
+<!-- PROJECT 6: Portfolio Management -->
+<div class="project-card animate-in" onclick="toggleCard(this)">
+  <span class="toggle-icon">+</span>
+  <div class="project-card-inner">
+    <div class="project-left">
+      <div>
+        <div class="project-category"><span class="dot"></span> Portfolio Management</div>
+        <h3 class="project-title">Portfolio Management Competition</h3>
+        <p class="project-subtitle">Nasdaq-100 Benchmark Strategy</p>
+        <p class="project-desc">Developed and managed an investment portfolio strategically benchmarked against the Nasdaq-100 (QQQ). Achieved the lowest tracking error in the cohort while maintaining lower risk than the benchmark through continuous attribution and variance analysis.</p>
+      </div>
+      <div class="skills-row"><span class="skill-tag">Portfolio Construction</span><span class="skill-tag">Performance Attribution</span><span class="skill-tag">Variance Analysis</span><span class="skill-tag">Risk Assessment</span><span class="skill-tag">Benchmarking</span></div>
+    </div>
+    <div class="project-right">
+      <div class="metric-row"><span class="metric-label">Ann. Return</span><span class="metric-value positive">6.5%</span></div>
+      <div class="metric-row"><span class="metric-label">Ann. Volatility</span><span class="metric-value">10.92%</span></div>
+      <div class="metric-row"><span class="metric-label">Tracking Error</span><span class="metric-value highlight">Lowest in Cohort</span></div>
+      <div class="metric-row"><span class="metric-label">Risk vs QQQ</span><span class="metric-value positive">Lower</span></div>
+      <div class="metric-row"><span class="metric-label">Benchmark</span><span class="metric-value blue">QQQ (Nasdaq-100)</span></div>
+    </div>
+  </div>
+  <div class="project-expanded"><div class="project-expanded-inner">
+    <div class="expanded-grid">
+      <div class="detail-block"><h4>Methodology</h4><ul>
+        <li>Strategic portfolio construction benchmarked to Nasdaq-100</li>
+        <li>Continuous performance attribution across sectors and holdings</li>
+        <li>Variance decomposition to identify alpha and tracking error drivers</li>
+        <li>Systematic rebalancing based on risk/return optimization</li>
+      </ul></div>
+      <div class="detail-block"><h4>Outcomes</h4><ul>
+        <li>Achieved lowest tracking error among all participants</li>
+        <li>Maintained annualized volatility below benchmark index</li>
+        <li>Consistent risk-adjusted performance throughout period</li>
+      </ul></div>
+    </div>
+    <div class="files-section"><h4>Project Files</h4><div class="file-links">
+      <div class="file-placeholder"><span class="file-icon xlsx">XLS</span> Portfolio Tracker — Upload to link</div>
+      <div class="file-placeholder"><span class="file-icon pptx">PPT</span> Presentation — Upload to link</div>
+    </div></div>
+  </div></div>
+</div>
+
+<!-- PROJECT 7: Midland Energy WACC -->
+<div class="project-card animate-in" onclick="toggleCard(this)">
+  <span class="toggle-icon">+</span>
+  <div class="project-card-inner">
+    <div class="project-left">
+      <div>
+        <div class="project-category"><span class="dot"></span> Corporate Finance</div>
+        <h3 class="project-title">Midland Energy Resources: Cost of Capital</h3>
+        <p class="project-subtitle">HBS Case Study · WACC Analysis</p>
+        <p class="project-desc">Calculated divisional and corporate WACC for Midland Energy Resources ($248.5B revenue), a global energy company with E&P, Refining & Marketing, and Petrochemicals divisions. Derived unobservable divisional betas using asset-weighted decomposition and estimated a 9.86% WACC for the Petrochemicals division.</p>
+      </div>
+      <div class="skills-row"><span class="skill-tag">WACC</span><span class="skill-tag">CAPM</span><span class="skill-tag">Beta Estimation</span><span class="skill-tag">Cost of Debt</span><span class="skill-tag">Capital Structure</span><span class="skill-tag">Divisional Analysis</span></div>
+    </div>
+    <div class="project-right">
+      <div class="metric-row"><span class="metric-label">Company Revenue</span><span class="metric-value highlight">$248.5B</span></div>
+      <div class="metric-row"><span class="metric-label">Consolidated WACC</span><span class="metric-value highlight">8.13%</span></div>
+      <div class="metric-row"><span class="metric-label">E&P Division WACC</span><span class="metric-value">8.04%</span></div>
+      <div class="metric-row"><span class="metric-label">R&M Division WACC</span><span class="metric-value">9.11%</span></div>
+      <div class="metric-row"><span class="metric-label">Petrochem WACC</span><span class="metric-value positive">5.92%</span></div>
+      <div class="metric-row"><span class="metric-label">Petrochem Credit Rating</span><span class="metric-value blue">AA−</span></div>
+    </div>
+  </div>
+  <div class="project-expanded"><div class="project-expanded-inner">
+    <div class="expanded-grid">
+      <div class="detail-block"><h4>Methodology</h4><ul>
+        <li>10-year Treasury yield (4.66%) as risk-free rate; 3-year average tax rate of 39.73%</li>
+        <li>Unleveraged industry betas from comparable companies, re-levered to divisional capital structures</li>
+        <li>CAPM cost of equity using β × EMRP (5.0%) for each division</li>
+        <li>Asset-weighted beta decomposition to derive Petrochemicals unlevered β = 0.41</li>
+        <li>Divisional WACC = after-tax cost of debt × D/V + cost of equity × E/V</li>
+      </ul></div>
+      <div class="detail-block"><h4>Key Findings</h4><ul>
+        <li>Consolidated WACC: 8.13% — balanced across all three divisions</li>
+        <li>E&P WACC 8.04%: high capital intensity and geopolitical risk (β = 1.40, D/V = 46%)</li>
+        <li>R&M WACC 9.11%: highest cost due to thin margins, BBB rating, competitive market</li>
+        <li>Petrochemicals WACC 5.92%: lowest cost; AA− rating, steady cash flows, D/V = 40%</li>
+        <li>Divisional WACCs serve as project-level hurdle rates for capital allocation</li>
+      </ul></div>
+    </div>
+    <div class="files-section"><h4>Project Files</h4><div class="file-links">
+      <a href="Midland_Case_Report__Final_.pdf" class="file-link" download><span class="file-icon pdf">PDF</span> WACC Analysis</a>
+    </div></div>
+  </div></div>
+</div>
+
+  </div>
+</section>
+
+<section id="competencies">
+  <div class="section-header animate-in"><span class="section-number">02</span><h2 class="section-title">Core Competencies</h2><div class="section-line"></div></div>
+  <div class="skills-grid">
+    <div class="skill-card animate-in"><div class="skill-card-icon">📊</div><h3>Financial Modeling</h3><p>Three-statement models, DCF, LBO, and integrated projection frameworks.</p><div class="skill-bar-track"><div class="skill-bar-fill" data-width="95"></div></div></div>
+    <div class="skill-card animate-in"><div class="skill-card-icon">🎯</div><h3>Valuation & WACC</h3><p>DCF, CAPM, WACC, comparable companies, and sensitivity analysis.</p><div class="skill-bar-track"><div class="skill-bar-fill" data-width="92"></div></div></div>
+    <div class="skill-card animate-in"><div class="skill-card-icon">📈</div><h3>Econometrics</h3><p>VAR, BEKK-GARCH, structural break tests, and time series modeling.</p><div class="skill-bar-track"><div class="skill-bar-fill" data-width="88"></div></div></div>
+    <div class="skill-card animate-in"><div class="skill-card-icon">⚖️</div><h3>M&A Analysis</h3><p>Accretion/dilution, synergy modeling, and deal structuring.</p><div class="skill-bar-track"><div class="skill-bar-fill" data-width="90"></div></div></div>
+    <div class="skill-card animate-in"><div class="skill-card-icon">🔄</div><h3>Derivatives</h3><p>Options pricing, multi-leg strategies, and volatility trading.</p><div class="skill-bar-track"><div class="skill-bar-fill" data-width="85"></div></div></div>
+    <div class="skill-card animate-in"><div class="skill-card-icon">🛡️</div><h3>Risk Management</h3><p>Variance decomposition, tracking error, and spillover analysis.</p><div class="skill-bar-track"><div class="skill-bar-fill" data-width="86"></div></div></div>
+    <div class="skill-card animate-in"><div class="skill-card-icon">📉</div><h3>Quant Analysis</h3><p>Momentum strategies, backtesting, and signal-based construction.</p><div class="skill-bar-track"><div class="skill-bar-fill" data-width="87"></div></div></div>
+    <div class="skill-card animate-in"><div class="skill-card-icon">💻</div><h3>Programming</h3><p>Python, MATLAB, Jupyter, Pandas, NumPy, Matplotlib, and automation.</p><div class="skill-bar-track"><div class="skill-bar-fill" data-width="84"></div></div></div>
+  </div>
+</section>
+
+<section id="tools">
+  <div class="section-header animate-in"><span class="section-number">03</span><h2 class="section-title">Tools & Technologies</h2><div class="section-line"></div></div>
+  <div class="tools-row animate-in">
+    <div class="tool-chip">🐍 Python</div><div class="tool-chip">📐 MATLAB</div><div class="tool-chip">🐼 Pandas</div><div class="tool-chip">🔢 NumPy</div><div class="tool-chip">📉 Matplotlib</div><div class="tool-chip">📓 Jupyter</div><div class="tool-chip">📗 Excel / VBA</div><div class="tool-chip">📊 Bloomberg Terminal</div><div class="tool-chip">📂 FactSet</div><div class="tool-chip">💹 PitchBook</div><div class="tool-chip">📑 PowerPoint</div><div class="tool-chip">🎮 Investopedia Sim</div>
+  </div>
+</section>
+
+<section id="files">
+  <div class="section-header animate-in"><span class="section-number">04</span><h2 class="section-title">Document Repository</h2><div class="section-line"></div></div>
+
+  <div class="repo-banner animate-in">
+    <div class="repo-banner-left"><h3>LVMH × Tiffany M&A Analysis</h3><p>Financial model, executive presentation, and case report.</p></div>
+    <div style="display:flex;gap:10px;flex-wrap:wrap">
+      <a href="Tiffany_Model.xlsx" class="repo-file-link" download><span style="width:24px;height:24px;border-radius:5px;display:inline-flex;align-items:center;justify-content:center;font-size:0.5rem;font-weight:700;color:#fff;background:#1D6F42">XLS</span> Model</a>
+      <a href="Tiffany___Co_.pptx" class="repo-file-link" download><span style="width:24px;height:24px;border-radius:5px;display:inline-flex;align-items:center;justify-content:center;font-size:0.5rem;font-weight:700;color:#fff;background:#D24726">PPT</span> Deck</a>
+      <a href="M_A_-_LVMH_x_Tiffany.pdf" class="repo-file-link" download><span style="width:24px;height:24px;border-radius:5px;display:inline-flex;align-items:center;justify-content:center;font-size:0.5rem;font-weight:700;color:#fff;background:#D32F2F">PDF</span> Report</a>
+    </div>
+  </div>
+
+  <div class="repo-banner animate-in">
+    <div class="repo-banner-left"><h3>Microsoft Corporation — Valuation</h3><p>Corporate valuation, DCF, and shareholder value strategy.</p></div>
+    <a href="Microsoft_Valuation_Consulting_Report.pdf" class="repo-file-link" download><span style="width:24px;height:24px;border-radius:5px;display:inline-flex;align-items:center;justify-content:center;font-size:0.5rem;font-weight:700;color:#fff;background:#D32F2F">PDF</span> Valuation Report</a>
+  </div>
+
+  <div class="repo-banner animate-in">
+    <div class="repo-banner-left"><h3>Derivatives &amp; Options Trading</h3><p>Full trading report and Python analysis notebook.</p></div>
+    <div style="display:flex;gap:10px;flex-wrap:wrap">
+      <a href="Derivatives_Report.pdf" class="repo-file-link" download><span style="width:24px;height:24px;border-radius:5px;display:inline-flex;align-items:center;justify-content:center;font-size:0.5rem;font-weight:700;color:#fff;background:#D32F2F">PDF</span> Trading Report</a>
+      <a href="Derivatives_project.ipynb" class="repo-file-link" download><span style="width:24px;height:24px;border-radius:5px;display:inline-flex;align-items:center;justify-content:center;font-size:0.5rem;font-weight:700;color:#fff;background:#F37626">NB</span> Notebook</a>
+    </div>
+  </div>
+
+  <div class="repo-banner animate-in">
+    <div class="repo-banner-left"><h3>U.S. Spillover Effects Research</h3><p>VAR-BEKK GARCH analysis of global market spillovers (2014–2024).</p></div>
+    <a href="Spillover_Effects_Research.pdf" class="repo-file-link" download><span style="width:24px;height:24px;border-radius:5px;display:inline-flex;align-items:center;justify-content:center;font-size:0.5rem;font-weight:700;color:#fff;background:#D32F2F">PDF</span> Research Paper</a>
+  </div>
+
+  <div class="repo-banner animate-in">
+    <div class="repo-banner-left"><h3>Momentum Sector Rotation Strategy</h3><p>Python notebook and strategy report for Fama-French 49 Industries.</p></div>
+    <div style="display:flex;gap:10px;flex-wrap:wrap">
+      <a href="Project_3.ipynb" class="repo-file-link" download><span style="width:24px;height:24px;border-radius:5px;display:inline-flex;align-items:center;justify-content:center;font-size:0.5rem;font-weight:700;color:#fff;background:#F37626">NB</span> Notebook</a>
+      <a href="Momentum_Based_Strategy.pdf" class="repo-file-link" download><span style="width:24px;height:24px;border-radius:5px;display:inline-flex;align-items:center;justify-content:center;font-size:0.5rem;font-weight:700;color:#fff;background:#D32F2F">PDF</span> Report</a>
+    </div>
+  </div>
+
+  <div class="repo-banner animate-in">
+    <div class="repo-banner-left"><h3>Midland Energy — Cost of Capital</h3><p>WACC analysis for Petrochemicals division.</p></div>
+    <a href="Midland_Case_Report__Final_.pdf" class="repo-file-link" download><span style="width:24px;height:24px;border-radius:5px;display:inline-flex;align-items:center;justify-content:center;font-size:0.5rem;font-weight:700;color:#fff;background:#D32F2F">PDF</span> WACC Analysis</a>
+  </div>
+
+</section>
+
+<footer>
+  <div class="footer-left">Rishav Jhaveri</div>
+</footer>
+
+<script>
+function toggleCard(c){c.classList.toggle('expanded')}
+const o=new IntersectionObserver(e=>{e.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')})},{threshold:0.1,rootMargin:'0px 0px -40px 0px'});
+document.querySelectorAll('.animate-in').forEach(e=>o.observe(e));
+const b=new IntersectionObserver(e=>{e.forEach(e=>{if(e.isIntersecting){const f=e.target.querySelector('.skill-bar-fill');if(f)f.style.width=f.dataset.width+'%'}})},{threshold:0.3});
+document.querySelectorAll('.skill-card').forEach(e=>b.observe(e));
+</script>
+</body>
+</html>
